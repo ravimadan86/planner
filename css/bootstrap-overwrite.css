@@ -1,0 +1,78 @@
+.grid-view .button-column
+{
+    width: 60px;
+}
+
+.well-custom
+{
+    overflow: hidden;
+}
+
+.well-custom  input, .well-custom textarea, .well-custom .uneditable-input
+{
+    width: 70%
+}
+
+.well input[type="radio"], .well input[type="checkbox"]
+{
+    width: auto;
+}
+.well-custom select
+{
+    width: 71%;
+}
+
+.notification-template-actions .input-small
+{
+    margin-bottom: 0;
+    margin-right: 5px;
+}
+
+.notification-grid
+{
+    max-width: 71%;
+}
+.form-fields
+{
+    width: 74%;
+}
+.notification-form-hints
+{
+    width: 24%;
+    border: solid 1px #eee;
+    min-height: 200px;
+    background: #fff;
+}
+.notification-form-hints p
+{
+    padding: 10px 5px;
+}
+.notification-form-hints ul
+{
+    list-style: none;
+}
+
+.input-small
+{
+    max-width: 220px;
+}
+
+.go-loading
+{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.go-loading img
+{
+    display: block;
+    margin: 20% auto;
+}
+
+.input85 input
+{
+    width: 85%;
+}

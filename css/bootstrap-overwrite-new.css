@@ -1,0 +1,63 @@
+/* Bootstrap Overwrite CSS */
+
+.mainContainer {
+  margin-bottom: 20px; }
+  .mainContainer .timerContainer .countdownTimer {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    height: 80%; }
+    .mainContainer .timerContainer .countdownTimer .btnTimer .timerBlock {
+      width: 25%;
+      text-align: center; }
+      .mainContainer .timerContainer .countdownTimer .btnTimer .timerBlock span {
+        padding: 11px;
+        color: #fff;
+        font-size: 18px; }
+      .mainContainer .timerContainer .countdownTimer .btnTimer .timerBlock .btnBlue {
+        background-color: #25aae3; }
+      .mainContainer .timerContainer .countdownTimer .btnTimer .timerBlock .btnRed {
+        background-color: #ec1d25; }
+      .mainContainer .timerContainer .countdownTimer .btnTimer .timerBlock .btnGreen {
+        background-color: #11a99b; }
+      .mainContainer .timerContainer .countdownTimer .btnTimer .timerBlock .btnPurple {
+        background-color: #7f3d97; }
+    .mainContainer .timerContainer .countdownTimer.countdownTimer_static {
+      margin-top: 3%; }
+      .mainContainer .timerContainer .countdownTimer.countdownTimer_static ul {
+        margin: 0px; }
+        .mainContainer .timerContainer .countdownTimer.countdownTimer_static ul li {
+          width: 25%;
+          text-align: center;
+          float: left;
+          list-style: none;
+          position: relative; }
+          .mainContainer .timerContainer .countdownTimer.countdownTimer_static ul li span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 32px;
+            top: 43%;
+            color: #5e5e5e;
+            position: absolute; }
+      .mainContainer .timerContainer .countdownTimer.countdownTimer_static .btnTimer .timerBlock {
+        margin-top: 47px; }
+  .mainContainer .timerContainer .timerHeading {
+    text-align: center;
+    margin: 7% 0;
+    line-height: 30px; }
+    .mainContainer .timerContainer .timerHeading p {
+      font-size: 36px;
+      color: #5e5e5e; }
+    .mainContainer .timerContainer .timerHeading h4 {
+      font-size: 45px;
+      color: #0da3e2;
+      margin: 4% 0 0 0; }
+
+.mainContainer .timerContainer .countdownTimer.countdownTimer_static ul li img {
+	max-width: 68%; 
+}
+.mainContainer .timerContainer .countdownTimer.countdownTimer_static ul li span {
+	font-size: 20px;
+	font-weight: bold;
+}
