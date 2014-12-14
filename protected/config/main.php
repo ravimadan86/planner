@@ -139,7 +139,7 @@ return array(
 		'roleNames'=>array(
             'Admin'=>'Admin',
             'AccountAdmin' => 'Account Manager',
-            'Account' => 'Account User',
+            'AccountStaff' => 'Account User',
             'Templator' => 'Templator'
         ),
         'sampleCsvFiles' => array(

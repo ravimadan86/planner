@@ -35,8 +35,7 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-        $allUserRoles = Yii::app()->params['roleNames'];
-        
+        $allUserRoles = array_keys(Yii::app()->params['roleNames']);
 		$model=new User;
         
         // creating instance of AuthAssignment model
@@ -53,6 +52,7 @@ class UserController extends Controller
             try
             {
                 $model->attributes=$_POST['User'];
+                $model->account_id = fetchUserAccountId();
                 $pwd_string = getGlobalPreferences('password_string_length');
                 $password = getRandomString($pwd_string);
                 $model->password = md5($password);
@@ -63,6 +63,7 @@ class UserController extends Controller
                     Yii::app()->user->setFlash('warning', '<strong>Email "'.$model->email.'" already exists!</strong>');
                     $saveUserDetails = false;
                 }
+
                 if (!in_array($model->role, $allUserRoles))
                 {
                     Yii::app()->user->setFlash('warning', '<strong>User Role does not exists!</strong>');
@@ -115,7 +116,8 @@ class UserController extends Controller
                         }
                         
                         Yii::app()->user->setFlash('success', '<strong>Success!</strong> User created successfully');
-                        $this->redirect(array('view','id'=>$user_id_created));
+                        //$this->redirect(array('view','id'=>$user_id_created));
+                        $this->redirect(array('admin'));
                     }
                 }
             }
@@ -142,7 +144,14 @@ class UserController extends Controller
         $allUserRoles = Yii::app()->params['roleNames'];
         
 		$model=$this->loadModel($id);
+        $loggedInUserAccount = fetchUserAccountId();
         
+        if (!isAdminUser() && $loggedInUserAccount!=$model->id)
+        {
+            Yii::app()->user->setFlash('warning', '<strong>Warning!</strong> You do not have access to update this user');
+            //$this->redirect(array('view','id'=>$id));
+            $this->redirect(array('admin'));
+        }
         //Fetch Auth Role Assignment
         $authAssignmentModel = Authassignment::model()->findByAttributes(array('userid'=> $id));
 
@@ -161,6 +170,7 @@ class UserController extends Controller
                 $oldRole = $model->role;
                 
                 $model->attributes=$_POST['User'];
+                $model->account_id = fetchUserAccountId();
                 
                 $newEmail = $model->email;
                 $newRole = $model->role;
@@ -192,8 +202,10 @@ class UserController extends Controller
                         $transaction->commit();
 
                         Yii::app()->user->setFlash('success', '<strong>Success!</strong> User updated successfully');
-                        $this->redirect(array('view','id'=>$id));
+                        //$this->redirect(array('view','id'=>$id));
+                        $this->redirect(array('admin'));
                     }
+                    
                 }
                 else
                 {

@@ -389,4 +389,20 @@ function getPersonCustomTagValues($mailgroup_id, $person_id)
     return $tags;
 }
 
+function fetchUserAccountId($user_id = null)
+{
+    if($user_id)
+    {
+        $userModel = User::model()->findByAttributes(array('user_id'=>$user_id, 'is_active'=>1));
+        $account_id = $userModel->account_id;
+    }
+    else
+    {
+        $user_id = Yii::app()->user->id;
+        $userModel = User::model()->findByPk($user_id);
+        $account_id = $userModel->account_id;
+    }
+    return $account_id;
+}
+
 ?>

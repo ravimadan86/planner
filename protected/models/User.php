@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'user':
  * @property integer $user_id
+ * @property integer $account_id
  * @property string $role
  * @property string $email
  * @property string $password
@@ -17,11 +18,19 @@
  * @property string $country
  * @property string $zip_code
  * @property string $company_name
+ * @property integer $timezone_offset
  * @property string $is_active
  * @property string $last_modified_time
  * @property string $registration_token
  * @property string $forgot_token
  * @property string $created_on
+ *  
+ * The followings are the available model relations:
+ * @property Accounts[] $accounts
+ * @property Mailgroups[] $mailgroups
+ * @property Surveys[] $surveys
+ * @property Templates[] $templates
+ * @property Accounts $account
  */
 class User extends CActiveRecord
 {
@@ -41,14 +50,15 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('role, email, first_name, address_line_1, city, state, country, zip_code', 'required'),
+			array('account_id, role, email, first_name', 'required'),
+            array('account_id, timezone_offset', 'numerical', 'integerOnly'=>true),
 			array('role, email, password, first_name, last_name, address_line_1, address_line_2, city, state, country, zip_code, company_name, registration_token, forgot_token', 'length', 'max'=>255),
 			array('is_active', 'length', 'max'=>1),
             array('email','email'),
 			array('last_modified_time, created_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('user_id, role, email, password, first_name, last_name, address_line_1, address_line_2, city, state, country, zip_code, company_name, is_active, last_modified_time, registration_token, forgot_token, created_on', 'safe', 'on'=>'search'),
+			array('user_id, account_id, role, email, password, first_name, last_name, address_line_1, address_line_2, city, state, country, zip_code, company_name, is_active, last_modified_time, registration_token, forgot_token, created_on', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +70,11 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'accounts' => array(self::HAS_MANY, 'Accounts', 'owner_id'),
+			'mailgroups' => array(self::HAS_MANY, 'Mailgroups', 'user_id'),
+			'surveys' => array(self::HAS_MANY, 'Surveys', 'user_id'),
+			'templates' => array(self::HAS_MANY, 'Templates', 'user_id'),
+			'account' => array(self::BELONGS_TO, 'Accounts', 'account_id'),
 		);
 	}
 
@@ -70,6 +85,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'User',
+            'account_id' => 'Account',
 			'role' => 'Role',
 			'email' => 'Email',
 			'password' => 'Password',
@@ -82,6 +98,7 @@ class User extends CActiveRecord
 			'country' => 'Country',
 			'zip_code' => 'Zip Code',
 			'company_name' => 'Organisation',
+            'timezone_offset' => 'Timezone Offset',
 			'is_active' => 'Status',
 			'last_modified_time' => 'Last Modified Time',
 			'registration_token' => 'Registration Token',
@@ -109,6 +126,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('user_id',$this->user_id);
+        $criteria->compare('account_id',$this->account_id);
 		$criteria->compare('role',$this->role,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
@@ -121,6 +139,7 @@ class User extends CActiveRecord
 		$criteria->compare('country',$this->country,true);
 		$criteria->compare('zip_code',$this->zip_code,true);
 		$criteria->compare('company_name',$this->company_name,true);
+        $criteria->compare('timezone_offset',$this->timezone_offset);
 		$criteria->compare('is_active',$this->is_active,true);
 		$criteria->compare('last_modified_time',$this->last_modified_time,true);
 		$criteria->compare('registration_token',$this->registration_token,true);
