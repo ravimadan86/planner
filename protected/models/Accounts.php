@@ -13,6 +13,9 @@
  *
  * The followings are the available model relations:
  * @property User $owner
+ * @property Mailgroups[] $mailgroups
+ * @property Surveys[] $surveys
+ * @property Templates[] $templates
  * @property User[] $users
  */
 class Accounts extends CActiveRecord
@@ -52,6 +55,9 @@ class Accounts extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'owner' => array(self::BELONGS_TO, 'User', 'owner_id'),
+			'mailgroups' => array(self::HAS_MANY, 'Mailgroups', 'user_account_id'),
+			'surveys' => array(self::HAS_MANY, 'Surveys', 'user_account_id'),
+			'templates' => array(self::HAS_MANY, 'Templates', 'user_account_id'),
 			'users' => array(self::HAS_MANY, 'User', 'account_id'),
 		);
 	}

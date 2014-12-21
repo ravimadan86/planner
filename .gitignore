@@ -39,4 +39,4 @@ Thumbs.db
 ######################
 /assets/
 /nbproject/
-/runtime/
+/protected/runtime/
