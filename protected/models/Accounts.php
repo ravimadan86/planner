@@ -69,7 +69,7 @@ class Accounts extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Team Name',
 			'address' => 'Address',
 			'is_active' => 'Is Active',
 			'owner_id' => 'Owner',
